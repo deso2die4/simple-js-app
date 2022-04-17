@@ -1,3 +1,3 @@
-let size = 100;
-let doubleSize = size * 2;
-document.write(doubleSize);
+alert('Hello World');
+let favoriteFood = 'Pizza';
+document.write(favoriteFood);
