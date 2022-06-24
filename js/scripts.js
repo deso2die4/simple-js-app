@@ -61,7 +61,7 @@ console.log(pokemonRepository.getAll());
 
 
 
-  pokemonRepository.getAll.forEach(function(pokemon) {
+  pokemonRepository.getAll().forEach(function(pokemon) {
     if (pokemon.height > 15) {
        document.write(pokemon.name + ' height: ' + pokemon.height + ' Wow thats big!!!' + '<br>');
     } else {
