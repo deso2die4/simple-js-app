@@ -25,7 +25,7 @@ let pokemonRepository = (function() {
     {name: 'coolPokemon', height: 12, type: ['coolness','chill'] }
   ];
 
-
+/*
   pokemonList.forEach(function(pokemon) {
     if (pokemon.height > 15) {
        document.write(pokemon.name + ' height: ' + pokemon.height + ' Wow thats big!!!' + '<br>');
@@ -34,15 +34,31 @@ let pokemonRepository = (function() {
     }
 
   });
-
+*/
+// returns the pokemonList
   function getAll(){
      return pokemonList;
    }
-
+//adds pokemon to the pokemonList
   function add(pokemon){
     return pokemonList.push(pokemon);
   }
 
+//function for addEventListener as a parameter
+    function showDetails(pokemon) {
+      console.log(pokemon);
+    }
+//function for foreach loop
+  function addListitem(pokemon) {
+  let pokemonList = document.querySelector('.pokemon-list');
+  let pokemonList2 = document.createElement('li');
+  let button = document.createElement('button');
+  button.innerText = pokemon.name;
+  button.classList.add('button-design');
+  button.addEventListener('click', showDetails);
+  pokemonList.appendChild(pokemonList2);
+  pokemonList2.appendChild(button);
+  }
 
 
   return {
@@ -50,17 +66,23 @@ let pokemonRepository = (function() {
 
     getAll: getAll,
 
+    addListitem: addListitem,
+
+    showDetails: showDetails,
+
   };
 
 
 })();
 
-document.write(pokemonRepository.getAll());
+//document.write(pokemonRepository.getAll());
 pokemonRepository.add({name: 'Pikachu'});
 console.log(pokemonRepository.getAll());
 
+let pokemonListprinted = document.createElement('p');
+pokemonListprinted.innerText = 'hallo';
 
-
+/*
   pokemonRepository.getAll().forEach(function(pokemon) {
     if (pokemon.height > 15) {
        document.write(pokemon.name + ' height: ' + pokemon.height + ' Wow thats big!!!' + '<br>');
@@ -69,3 +91,10 @@ console.log(pokemonRepository.getAll());
     }
 
   });
+*/
+
+    // lopps over the  IIFE pokemonList
+    pokemonRepository.getAll().forEach(function(pokemon) {
+      pokemonRepository.addListitem(pokemon);
+
+    });
