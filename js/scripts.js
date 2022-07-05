@@ -1,21 +1,4 @@
 
-//for ( i = 0; i < pokemonList.length; i++) {  //A Loop that goes over each Arraya in the pokemonList
-//  if (pokemonList[i].height > 15) {
-//    document.write(pokemonList[i].name + " height: " + pokemonList[i].height + " Wow thats big!!!" + "<br>");
-//  } else {
-//    document.write(pokemonList[i].name + " height: " + pokemonList[i].height + "<br>");
-//  }
-//}
-
-//pokemonList.forEach(function(pokemon) {
-//  if (pokemon.height > 15) {
-//     document.write(pokemon.name + ' height: ' + pokemon.height + ' Wow thats big!!!' + '<br>');
-//  } else {
-//     document.write(pokemon.name + ' height: ' + pokemon.height + '<br>');
-  //}
-
-//});
-
 
 
 let pokemonRepository = (function() {
@@ -25,16 +8,6 @@ let pokemonRepository = (function() {
     {name: 'coolPokemon', height: 12, type: ['coolness','chill'] }
   ];
 
-/*
-  pokemonList.forEach(function(pokemon) {
-    if (pokemon.height > 15) {
-       document.write(pokemon.name + ' height: ' + pokemon.height + ' Wow thats big!!!' + '<br>');
-    } else {
-       document.write(pokemon.name + ' height: ' + pokemon.height + '<br>');
-    }
-
-  });
-*/
 // returns the pokemonList
   function getAll(){
      return pokemonList;
@@ -55,7 +28,9 @@ let pokemonRepository = (function() {
   let button = document.createElement('button');
   button.innerText = pokemon.name;
   button.classList.add('button-design');
-  button.addEventListener('click', showDetails);
+  button.addEventListener('click', function(){
+    showDetails(pokemon);
+  });
   pokemonList.appendChild(pokemonList2);
   pokemonList2.appendChild(button);
   }
@@ -75,23 +50,13 @@ let pokemonRepository = (function() {
 
 })();
 
-//document.write(pokemonRepository.getAll());
 pokemonRepository.add({name: 'Pikachu'});
 console.log(pokemonRepository.getAll());
 
 let pokemonListprinted = document.createElement('p');
-pokemonListprinted.innerText = 'hallo';
+pokemonListprinted.innerText = pokemonRepository.getAll();
 
-/*
-  pokemonRepository.getAll().forEach(function(pokemon) {
-    if (pokemon.height > 15) {
-       document.write(pokemon.name + ' height: ' + pokemon.height + ' Wow thats big!!!' + '<br>');
-    } else {
-       document.write(pokemon.name + ' height: ' + pokemon.height + '<br>');
-    }
 
-  });
-*/
 
     // lopps over the  IIFE pokemonList
     pokemonRepository.getAll().forEach(function(pokemon) {
