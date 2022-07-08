@@ -2,11 +2,7 @@
 
 
 let pokemonRepository = (function() {
-  let pokemonList = [
-    {name: 'crazyPokemon', height: 9, type: ['crazyness','loco'] },
-    {name: 'bigPokemon', height: 30, type: ['bigness','tall'] },
-    {name: 'coolPokemon', height: 12, type: ['coolness','chill'] }
-  ];
+  let pokemonList = [];
 
 // returns the pokemonList
   function getAll(){
@@ -17,10 +13,6 @@ let pokemonRepository = (function() {
     return pokemonList.push(pokemon);
   }
 
-//function for addEventListener as a parameter
-    function showDetails(pokemon) {
-      console.log(pokemon);
-    }
 //function for foreach loop
   function addListitem(pokemon) {
   let pokemonList = document.querySelector('.pokemon-list');
@@ -35,6 +27,43 @@ let pokemonRepository = (function() {
   pokemonList2.appendChild(button);
   }
 
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+
+  function loadList(){
+    return fetch(apiUrl).then(function (response){
+      return response.json();
+    }).then(function(json){
+      json.results.forEach(function (item){
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function (err) {
+      console.log(err);
+    })
+}
+
+function loadDetails(item){
+  let url = item.detailsUrl;
+  return fetch(url).then(function(response){
+  return response.json();
+  }).then(function(details){
+    item.imageUrl = details.sprites.front_default;
+    item.height = details.height;
+  }).catch(function(err){
+    console.error(err);
+  });
+}
+
+
+//function for addEventListener as a parameter
+    function showDetails(pokemon) {
+      loadDetails(pokemon).then(function(){
+        console.log(pokemon);
+      });
+    }
 
   return {
     add: add,
@@ -45,17 +74,19 @@ let pokemonRepository = (function() {
 
     showDetails: showDetails,
 
+    loadList: loadList,
+
+    loadDetails: loadDetails,
+
   };
 
 
 })();
 
-pokemonRepository.add({name: 'Pikachu'});
-console.log(pokemonRepository.getAll());
 
-let pokemonListprinted = document.createElement('p');
-pokemonListprinted.innerText = pokemonRepository.getAll();
 
+
+  pokemonRepository.loadList().then(function(){
 
 
     // lopps over the  IIFE pokemonList
@@ -63,3 +94,4 @@ pokemonListprinted.innerText = pokemonRepository.getAll();
       pokemonRepository.addListitem(pokemon);
 
     });
+})
