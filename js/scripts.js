@@ -1,6 +1,5 @@
 
 
-
 let pokemonRepository = (function() {
   let pokemonList = [];
 
@@ -17,11 +16,15 @@ let pokemonRepository = (function() {
   function addListitem(pokemon) {
   let pokemonList = document.querySelector('.pokemon-list');
   let pokemonList2 = document.createElement('li');
-  pokemonList2.classList.add('group-list-item');
-  let button = $('<button data-target="#modal" data-toggle="modal"></button>');
+  pokemonList2.classList.add('list-group-item');
+  let button = document.createElement('button');
   button.innerText = pokemon.name;
+  button.classList.add('button-design1');
   button.classList.add('btn');
   button.classList.add('btn-primary');
+  button.type = 'button';
+  button.dataset.toggle = 'modal';
+  button.dataset.target = '#modal-container';
   button.addEventListener('click', function(){
     showDetails(pokemon);
   //  showModal();
@@ -30,73 +33,52 @@ let pokemonRepository = (function() {
   pokemonList2.appendChild(button);
   }
 
-function showModal(item){
-  let modalBody = $('.modal-body');
-  let modalTitle = $('.modal-title');
-  let modalHeader = $('.modal-header');
-
-
-  modalTitle.empty();
-  modalBody.empty();
-
-  let nameElement = $('<h1>' + item.name + '</h1>');
-  let imageElementFont = $('<img class="modal-img style="width:50%">');
-  imgageElemetFront.attr("src", item.imageUrlFront);
-  let imageElementBack = $('<img class="modal-img style="width:50%">');
-  imgageElemetBack.attr("src", item.imageUrlBack);
-  let heightElement = $('<p>' + ' height : ' + item.height + '</p>' );
-
-  modalTitle.append(nameElement);
-  modalBody.append(imageElementFont);
-  modalBody.append(imageElementBack);
-  modalBody.append(heightElement);
-
 // shows on click the Details of the Pokemon in a modal
-/*  function showModal(titel, content, image){
-    let modalContainer = document.querySelector('.modal-container');
-    modalContainer.classList.remove('invisible');
-    let modal = document.querySelector('.modal')
-    modalContainer.appendChild(modal);
-    let buttonClose = document.createElement('div');
-    buttonClose.classList.add('button-close');
-    let title = modal.querySelector('h1');
-    let text = modal.querySelector('p');
+  function showModal(titel, content, image){
+    //let modalContainer = document.querySelector('.modal-container1');
+  //  modalContainer.classList.remove('invisible1');
+    //let modal = document.querySelector('.modal1')
+  ////  modalContainer.appendChild(modal);
+  //  let buttonClose = document.createElement('div');
+  //  buttonClose.classList.add('button-close1');
+    let title = document.querySelector('.modal-title');
+    let text = document.querySelector('.modal-body');
     title.innerText = titel;
     text.innerText = 'height: ' + content;
-    let img = document.querySelector('.image');
-    img.src = image;
-    img.classList.remove('invisible');
+
+    let img = $('<img class="modal-img" style="width:50%">');
+    img.attr('src', image);
+
+    //img.classList.remove('invisible1');
+    text.append(img);
 
   }
-  /*
 // hide function for modal
-function hideModal() {
-  let modalContainer = document.querySelector('.modal-container');
-  modalContainer.classList.add('invisible');
-  let img = document.querySelector('.image');
-  img.classList.add('invisible')
+//function hideModal() {
+//  let modalContainer = document.querySelector('.modal-container1');
+//  modalContainer.classList.add('invisible1');
+//  let img = document.querySelector('.image1');
+//  img.classList.add('invisible1')
 
-}
+//}
 // hides the modal on click of button= close-button
-/*
-let closeButton = document.querySelector('.button-close');
-closeButton.addEventListener('click', hideModal);
+//let closeButton = document.querySelector('.button-close1');
+//closeButton.addEventListener('click', hideModal);
 // hides modal when press Escape
-window.addEventListener('keydown', (event) => {
-  let modalContainer = document.querySelector('.modal-container');
-  if(event.key === 'Escape' && !modalContainer.classList.contains('.invisible')) {
-    hideModal();
-  }
-});
+//window.addEventListener('keydown', (event) => {
+//  let modalContainer = document.querySelector('.modal-container1');
+//  if(event.key === 'Escape' && !modalContainer.classList.contains('.invisible1')) {
+//    hideModal();
+//  }
+//});
 // hides modal on click outside the modal
-/*
-document.querySelector('.modal').addEventListener('click', function (target) {
-  let modalContainer = document.querySelector('.modal-container');
-  if (target.target === modalContainer) {
-    hideModal();
-  }
-})
-*/
+//document.querySelector('.modal-container1').addEventListener('click', function (target) {
+//  let modalContainer = document.querySelector('.modal-container1');
+//  if (target.target === modalContainer) {
+//    hideModal();
+//  }
+//})
+
   /*function showModal(){
     let modalContainer = document.createElement('div');
     document.body.appendChild(modalContainer);
@@ -176,7 +158,7 @@ function loadDetails(item){
   };
 
 
-});
+})();
 
 
 
@@ -189,4 +171,4 @@ function loadDetails(item){
       pokemonRepository.addListitem(pokemon);
 
     });
-});
+})
