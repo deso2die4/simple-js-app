@@ -10,8 +10,5 @@ If i could i would put much more functionaliti in the app.
 - What lessons did you learn during this project?
 I learned a lot of things, i learned to programm with jaa script and i learned how to hendel errors and to try to keep calm.
 
-A link to the Github repository:
-https://github.com/deso2die4/to-do-list-app
-
-4) A link to the live
-file:///C:/Users/kojic/Desktop/simple-js-app/index.html
+A link to the App:
+https://deso2die4.github.io/simple-js-app/
