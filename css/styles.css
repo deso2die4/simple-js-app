@@ -22,6 +22,10 @@
    align-items: center;
  }
 
+.fixed {
+  position: fixed;
+}
+
 
  @media all and (min-width: 600px) and (max-width: 900px) {
    .button-design1 {
